@@ -355,4 +355,4 @@ def _empty_result(
         tradeoffs=[],
         additional_evidence_needed=additional,
         unresolved_questions=unresolved,
-    )
+    )q
