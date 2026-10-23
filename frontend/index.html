@@ -1,0 +1,266 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AgentSolve AI: a multi-agent research platform that investigates, challenges, and validates answers with evidence.">
+  <title>AgentSolve AI | Research with evidence</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Application">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">AS</span>
+        <div>
+          <p class="brand-name">AgentSolve AI</p>
+          <p class="brand-tag">Think together. Challenge solutions. Validate results.</p>
+        </div>
+      </div>
+
+      <nav class="side-nav" aria-label="Main navigation">
+        <ul>
+          <li><button type="button" class="nav-item is-active" data-view="investigate" aria-current="page">Investigate</button></li>
+          <li><button type="button" class="nav-item" data-view="history">Research History</button></li>
+          <li><button type="button" class="nav-item" data-view="saved">Saved Reports</button></li>
+          <li><button type="button" class="nav-item" data-view="settings">Settings</button></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-foot">
+        <span class="mode-pill is-demo" id="mode-pill">Demo mode</span>
+        <p class="help">Five agents: Research, Solution, Skeptic, Validation, Decision.</p>
+      </div>
+    </aside>
+
+    <div class="scrim" id="scrim" hidden></div>
+
+    <div class="main-wrap">
+      <header class="topbar">
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation">Menu</button>
+        <p class="topbar-title" id="topbar-title">Investigate</p>
+        <span class="mode-banner" id="mode-banner" hidden>Demo mode: sample data only, not live research</span>
+      </header>
+
+      <main id="main" class="main" tabindex="-1">
+
+        <!-- ============ INVESTIGATE ============ -->
+        <section class="view is-active" id="view-investigate" data-view-panel="investigate" aria-labelledby="hero-heading">
+          <div class="hero">
+            <p class="eyebrow">Multi-agent research</p>
+            <h1 id="hero-heading">Research with evidence, not assumptions.</h1>
+            <p class="lede">Five specialised agents gather sources, propose solutions, challenge them, validate claims, and only then reach a recommendation.</p>
+          </div>
+
+          <div class="card research-card">
+            <form id="research-form" novalidate>
+              <label for="research-question" class="field-label">Research question</label>
+              <textarea id="research-question" name="question" rows="4" maxlength="500"
+                        aria-describedby="question-help question-error"
+                        placeholder="Ask a specific question you want investigated, for example: Does retrieval practice improve long-term retention compared with rereading?"></textarea>
+              <div class="field-meta">
+                <p id="question-help" class="help">Between 10 and 500 characters. Name the outcome you want evaluated.</p>
+                <span id="char-count" class="help">0 / 500</span>
+              </div>
+              <p id="question-error" class="field-error" role="alert" hidden></p>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="submit-btn">Start Investigation</button>
+                <button type="button" class="btn btn-ghost" id="reset-btn">Clear</button>
+              </div>
+            </form>
+
+            <div class="examples">
+              <p class="field-label">Example questions</p>
+              <ul class="example-list">
+                <li>
+                  <button type="button" class="example-btn" data-question="How does adaptive learning compare with fixed-pace instruction for improving student outcomes?">
+                    <span class="example-topic">Adaptive learning</span>
+                    <span class="example-text">How does adaptive learning compare with fixed-pace instruction for improving student outcomes?</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="example-btn" data-question="What does the evidence say about spaced repetition for long-term retention?">
+                    <span class="example-topic">Spaced repetition</span>
+                    <span class="example-text">What does the evidence say about spaced repetition for long-term retention?</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="example-btn" data-question="Is retrieval practice more effective than rereading for learning complex material?">
+                    <span class="example-topic">Retrieval practice</span>
+                    <span class="example-text">Is retrieval practice more effective than rereading for learning complex material?</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <section class="section" aria-labelledby="agents-heading">
+            <div class="section-head">
+              <h2 id="agents-heading">Agents</h2>
+              <p class="help">Statuses show only what the workflow reports. Nothing is marked complete until it is.</p>
+            </div>
+            <div class="agent-grid" id="agent-grid">
+              <article class="agent-card" data-agent="research" aria-labelledby="agent-research-name" style="--accent: #1E2B4A;">
+                <header class="agent-head">
+                  <span class="agent-index" aria-hidden="true">01</span>
+                  <span class="status-badge status-idle" data-role="status">Not started</span>
+                </header>
+                <h3 id="agent-research-name" class="agent-name">Research</h3>
+                <p class="agent-role">Gathers and ranks sources relevant to the question.</p>
+                <p class="agent-message" data-role="message">Waiting for an investigation.</p>
+              </article>
+
+              <article class="agent-card" data-agent="solution" aria-labelledby="agent-solution-name" style="--accent: #6B5A3C;">
+                <header class="agent-head">
+                  <span class="agent-index" aria-hidden="true">02</span>
+                  <span class="status-badge status-idle" data-role="status">Not started</span>
+                </header>
+                <h3 id="agent-solution-name" class="agent-name">Solution</h3>
+                <p class="agent-role">Proposes candidate answers and alternatives grounded in the sources.</p>
+                <p class="agent-message" data-role="message">Waiting for an investigation.</p>
+              </article>
+
+              <article class="agent-card" data-agent="skeptic" aria-labelledby="agent-skeptic-name" style="--accent: #7A3B3B;">
+                <header class="agent-head">
+                  <span class="agent-index" aria-hidden="true">03</span>
+                  <span class="status-badge status-idle" data-role="status">Not started</span>
+                </header>
+                <h3 id="agent-skeptic-name" class="agent-name">Skeptic</h3>
+                <p class="agent-role">Challenges each proposed solution with counterarguments and weak points.</p>
+                <p class="agent-message" data-role="message">Waiting for an investigation.</p>
+              </article>
+
+              <article class="agent-card" data-agent="validation" aria-labelledby="agent-validation-name" style="--accent: #3D5C54;">
+                <header class="agent-head">
+                  <span class="agent-index" aria-hidden="true">04</span>
+                  <span class="status-badge status-idle" data-role="status">Not started</span>
+                </header>
+                <h3 id="agent-validation-name" class="agent-name">Validation</h3>
+                <p class="agent-role">Checks claims against sources and flags unsupported statements.</p>
+                <p class="agent-message" data-role="message">Waiting for an investigation.</p>
+              </article>
+
+              <article class="agent-card" data-agent="decision" aria-labelledby="agent-decision-name" style="--accent: #2A2824;">
+                <header class="agent-head">
+                  <span class="agent-index" aria-hidden="true">05</span>
+                  <span class="status-badge status-idle" data-role="status">Not started</span>
+                </header>
+                <h3 id="agent-decision-name" class="agent-name">Decision</h3>
+                <p class="agent-role">Weighs the verified evidence and produces the final recommendation.</p>
+                <p class="agent-message" data-role="message">Waiting for an investigation.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="section" aria-labelledby="progress-heading">
+            <div class="section-head">
+              <h2 id="progress-heading">Research progress</h2>
+            </div>
+            <div class="card progress-card">
+              <div class="progress-head">
+                <p id="progress-label" class="progress-label">Waiting for a research question.</p>
+                <span id="progress-count" class="help">0 of 5 agents complete</span>
+              </div>
+              <div class="progress-track" id="progress-bar" role="progressbar" aria-labelledby="progress-heading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <span id="progress-fill"></span>
+              </div>
+              <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="section" aria-labelledby="evidence-heading">
+            <div class="section-head">
+              <h2 id="evidence-heading">Evidence</h2>
+            </div>
+            <div class="card" id="evidence-panel" aria-live="polite"></div>
+          </section>
+
+          <section class="section" aria-labelledby="report-heading">
+            <div class="section-head">
+              <h2 id="report-heading">Final report</h2>
+              <button type="button" class="btn btn-secondary" id="save-report-btn" hidden>Save report</button>
+            </div>
+            <div id="report-container" class="report-container" aria-live="polite"></div>
+          </section>
+        </section>
+
+        <!-- ============ HISTORY ============ -->
+        <section class="view" id="view-history" data-view-panel="history" hidden aria-labelledby="history-heading">
+          <div class="page-head">
+            <p class="eyebrow">Your investigations</p>
+            <h1 id="history-heading">Research History</h1>
+            <p class="lede">Investigations started on this device. Stored locally in this browser only.</p>
+          </div>
+          <div id="history-list" class="list-container"></div>
+        </section>
+
+        <!-- ============ SAVED ============ -->
+        <section class="view" id="view-saved" data-view-panel="saved" hidden aria-labelledby="saved-heading">
+          <div class="page-head">
+            <p class="eyebrow">Your library</p>
+            <h1 id="saved-heading">Saved Reports</h1>
+            <p class="lede">Reports you chose to keep. Stored locally in this browser only.</p>
+          </div>
+          <div id="saved-list" class="list-container"></div>
+        </section>
+
+        <!-- ============ SETTINGS ============ -->
+        <section class="view" id="view-settings" data-view-panel="settings" hidden aria-labelledby="settings-heading">
+          <div class="page-head">
+            <p class="eyebrow">Configuration</p>
+            <h1 id="settings-heading">Settings</h1>
+            <p class="lede">Connect the frontend to your FastAPI backend, or keep demo mode on for testing.</p>
+          </div>
+
+          <div class="card settings-card">
+            <form id="settings-form" novalidate>
+              <div class="form-row">
+                <label class="toggle">
+                  <input type="checkbox" id="demo-mode">
+                  <span class="toggle-text">
+                    <span class="toggle-title">Demo mode</span>
+                    <span class="help">Uses clearly labeled sample data and simulated progress. No backend or network calls are made.</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label for="api-base-url" class="field-label">Backend API base URL</label>
+                <input type="url" id="api-base-url" name="apiBaseUrl" placeholder="http://localhost:8000" autocomplete="off" aria-describedby="api-help api-error">
+                <p id="api-help" class="help">Used when demo mode is off. Must start with http:// or https://. Never place API keys or n8n credentials here.</p>
+                <p id="api-error" class="field-error" role="alert" hidden></p>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save settings</button>
+              </div>
+              <p id="settings-status" class="status-message" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div class="card settings-card">
+            <h2 class="card-title">Local data</h2>
+            <p class="help">Clears research history and saved reports stored in this browser.</p>
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" id="clear-data-btn">Clear local data</button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/agent-status.js"></script>
+  <script src="js/report-renderer.js"></script>
+  <script src="js/research-form.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+/* frontend/css/responsive.css */
+/* ==========================================================================
+   AgentSolve AI - Responsive layouts
+   Desktop: default styles (>= 1200px)
+   Tablet:  <= 1199px
+   Mobile:  <= 899px
+   Small:   <= 519px
+   ========================================================================== */
+
+/* ---------- Wide desktop refinements ---------- */
+@media (min-width: 1440px) {
+  .main {
+    max-width: 1200px;
+  }
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1199px) {
+  .app-shell {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
+  .sidebar {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .main {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .agent-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .example-list {
+    grid-template-columns: 1fr;
+  }
+
+  .example-btn {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--space-3);
+    height: auto;
+  }
+
+  .example-topic {
+    flex: 0 0 auto;
+    min-width: 130px;
+  }
+}
+
+/* ---------- Mobile: off-canvas sidebar ---------- */
+@media (max-width: 899px) {
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(300px, 86vw);
+    height: 100vh;
+    z-index: 50;
+    transform: translateX(-102%);
+    transition: transform 280ms var(--ease);
+    box-shadow: var(--shadow-md);
+    visibility: hidden;
+  }
+
+  .sidebar.is-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .mode-banner {
+    display: none;
+  }
+
+  .topbar {
+    padding: var(--space-3) var(--space-5);
+  }
+
+  .main {
+    padding: var(--space-5) var(--space-5) var(--space-6);
+  }
+
+  .hero,
+  .page-head {
+    margin-bottom: var(--space-5);
+  }
+
+  .section {
+    margin-top: var(--space-6);
+  }
+
+  .agent-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .agent-grid .agent-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .card {
+    padding: var(--space-5);
+  }
+
+  .report {
+    padding: var(--space-5);
+  }
+
+  #evidence-panel {
+    padding: var(--space-5);
+  }
+
+  .progress-card {
+    padding: var(--space-5);
+  }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 519px) {
+  body {
+    font-size: 14.5px;
+  }
+
+  .main {
+    padding: var(--space-4) var(--space-4) var(--space-6);
+  }
+
+  .topbar {
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .topbar-title {
+    font-size: 0.76rem;
+  }
+
+  .card,
+  .report,
+  #evidence-panel {
+    padding: var(--space-4);
+    border-radius: var(--radius);
+  }
+
+  .agent-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-grid .agent-card:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .agent-card {
+    padding: var(--space-4);
+  }
+
+  .agent-head {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .field-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  #save-report-btn {
+    width: 100%;
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .progress-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .item-actions {
+    width: 100%;
+  }
+
+  .item-actions .btn {
+    flex: 1 1 auto;
+  }
+
+  .evidence-head {
+    flex-direction: column;
+  }
+
+  .report-title {
+    font-size: 1.3rem;
+  }
+
+  .hero h1 {
+    font-size: 1.85rem;
+  }
+}
